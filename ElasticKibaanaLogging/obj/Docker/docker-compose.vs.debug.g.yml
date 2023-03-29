@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  elastickibaanalogging:
+    image: elastickibaanalogging:dev
+    container_name: ElasticKibaanaLogging_1
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "ElasticKibaanaLogging"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+    volumes:
+      - C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\ElasticKibaanaLogging:/app
+      - C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging:/src
+      - C:\Users\LEVEL UP SOLUTIONS 1\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\LEVEL UP SOLUTIONS 1\.nuget\packages\:/root/.nuget/packages:ro
+      - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  \"/app/bin/Debug/net6.0/ElasticKibaanaLogging.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
