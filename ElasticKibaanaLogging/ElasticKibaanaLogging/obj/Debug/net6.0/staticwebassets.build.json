@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "3ipkE7Fnnk++rvsdxL7oBWhmebmQ9A+q+uI/a7LZdHc=",
+  "Source": "ElasticKibaanaLogging",
+  "BasePath": "_content/ElasticKibaanaLogging",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
