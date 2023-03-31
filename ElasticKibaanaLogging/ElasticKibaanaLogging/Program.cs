@@ -9,6 +9,13 @@ namespace ElasticKibaanaLogging
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Host.ConfigureAppConfiguration(configuration =>
+            {
+
+                configuration.AddJsonFile("appsettings.json",optional:false,reloadOnChange:true);
+                configuration.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",optional:true);
+            }).UseSerilog();
+           
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             // Add services to the container.

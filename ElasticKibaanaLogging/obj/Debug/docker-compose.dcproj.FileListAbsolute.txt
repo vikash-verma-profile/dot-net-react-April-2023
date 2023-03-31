@@ -23,3 +23,5 @@ C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\b
 C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\bin\Debug\Serilog.Extensions.Hosting.dll
+C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging\bin\Debug\Serilog.Extensions.Logging.dll

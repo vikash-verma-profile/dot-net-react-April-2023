@@ -1,0 +1,76 @@
+name: dockercompose9632976949234989998
+services:
+  elastickibaanalogging:
+    build:
+      context: C:\Users\LEVEL UP SOLUTIONS 1\Desktop\DOT-NET-REACT-2023\ElasticKibaanaLogging
+      dockerfile: ElasticKibaanaLogging/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: elastickibaanalogging
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\LEVEL UP SOLUTIONS 1\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\LEVEL UP SOLUTIONS 1\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+  elasticsearch:
+    container_name: elasticsearch
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      discovery.type: single-node
+      xpack.monitoring.enabled: "true"
+      xpack.watcher.enabled: "false"
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+    networks:
+      elastic: null
+    ports:
+    - mode: ingress
+      target: 9200
+      published: "9200"
+      protocol: tcp
+    volumes:
+    - type: volume
+      source: elasticsearch-data
+      target: /usr/share/elasticsearch/data
+      volume: {}
+  kibana:
+    container_name: kibana
+    depends_on:
+      elasticsearch:
+        condition: service_started
+    environment:
+      ELASTICSEARCH_URL: http://localhost:9200
+    image: docker.elastic.co/kibana/kibana:7.9.1
+    networks:
+      elastic: null
+    ports:
+    - mode: ingress
+      target: 5601
+      published: "5601"
+      protocol: tcp
+networks:
+  default:
+    name: dockercompose9632976949234989998_default
+  elastic:
+    name: dockercompose9632976949234989998_elastic
+    driver: bridge
+volumes:
+  elasticsearch-data:
+    name: dockercompose9632976949234989998_elasticsearch-data
