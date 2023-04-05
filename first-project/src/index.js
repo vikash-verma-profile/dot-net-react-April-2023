@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import ClassComponent from './classcomponent';
 import reportWebVitals from './reportWebVitals';
+import CompanyComponent from './company';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    <ClassComponent/>
+    <CompanyComponent />
   </React.StrictMode>
 );
 
