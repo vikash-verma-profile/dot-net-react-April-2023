@@ -19,12 +19,12 @@ namespace CustomerApp.Controllers
             return db.Customers;
         }
         [HttpPost]
-        public IActionResult PostCustomer(Customer customer)
+        public IEnumerable<Customer> PostCustomer(Customer customer)
         {
             CustomerDbreactContext db = new CustomerDbreactContext();
             db.Customers.Add(customer);
             db.SaveChanges();
-            return Ok();
+            return db.Customers;
         }
     }
 }
