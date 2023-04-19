@@ -1,28 +1,53 @@
+import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
+
 const Login = () => {
+
+  const [username,setUsername]=useState("");
+  const [password,setPassword]=useState("");
+  //const navigate=useNavigate();
+
+  const onChangeUsername=(e)=>{
+    const username=e.target.value;
+    setUsername(username);
+  }
+  const onChangePassword=(e)=>{
+    const password=e.target.value;
+    setPassword(password);
+  }
+  const handleLogin=(e)=>{
+    e.preventDefault();
+    //navigate("/customer");
+  }
   return (
-    <form>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">
+    <form onSubmit={handleLogin}>
+      <div className="mb-3">
+        <label  className="form-label">
           Email address
         </label>
         <input
-          type="email"
-          class="form-control"
+          type="text"
+          className="form-control"
+          name="username"
+          value={username}
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
+          onChange={onChangeUsername}
         />
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">
+      <div className="mb-3">
+        <label  className="form-label">
           Password
         </label>
         <input
           type="password"
-          class="form-control"
-          id="exampleInputPassword1"
+          name="password"
+          value={password}
+          className="form-control"
+          onChange={onChangePassword}
         />
       </div>
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Login
       </button>
     </form>

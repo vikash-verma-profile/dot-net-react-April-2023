@@ -1,120 +1,49 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 const App = () => {
-  const [customers, SetCustomer] = useState([]);
-  const [customerCode, setCustomerCode] = useState("");
-  const [customerName, setCustomerName] = useState("");
-  const [customerAmount, setCustomerAmount] = useState(0);
-
-  useEffect(() => {
-    fetch("https://localhost:7293/api/Customer")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        SetCustomer(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addCustomer(customerCode, customerName, customerAmount);
-  };
-
-  const addCustomer = async (customerCode, customerName, customerAmount) => {
-    console.log(customerCode);
-    await fetch("https://localhost:7293/api/Customer", {
-      method: "POST",
-      body: JSON.stringify({
-        customerCode: customerCode,
-        customerName: customerName,
-        customerAmount: Number(customerAmount),
-      }),
-      headers: {
-        "Content-type": "application/json;charset=UTF-8",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        SetCustomer(data);
-        setCustomerCode("");
-        setCustomerName("");
-        setCustomerAmount(0);
-      });
-  };
   return (
-    <>
-      <br />
-      <h3>Add Customer</h3>
-      <br />
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Customer Code</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput"
-            placeholder="Customer Code"
-            value={customerCode}
-            onChange={(e) => setCustomerCode(e.target.value)}
-          />
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <Link to={"/"} className="navbar-brand">
+          Customer App
+        </Link>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/home"} className="nav-link">
+              Home
+            </Link>
+          </li>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Customer Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Customer Name"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-          />
+
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/login"} className="nav-link">
+              Login
+            </Link>
+          </li>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Customer Amount</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Customer Amount"
-            value={customerAmount}
-            onChange={(e) => setCustomerAmount(e.target.value)}
-          />
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/register"} className="nav-link">
+              Sign Up
+            </Link>
+          </li>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Add Customer
-        </button>
-      </form>
-      <br />
-      <br />
-      <table className="table">
-        <thead className="table-dark">
-          <tr>
-            <td>Customer Code</td>
-            <td>Customer Name</td>
-            <td>Customer Amount</td>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map((cust) => {
-            return (
-              <tr>
-                <td>{cust.customerCode}</td>
-                <td>{cust.customerName}</td>
-                <td>{cust.customerAmount}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </>
+      </nav>
+
+      <div className="container mt-3">
+        <Routes>
+          <Route exact path={"/"} element={<Home />} />
+          <Route exact path={"/home"} element={<Home />} />
+          <Route exact path={"/login"} element={<Login />} />
+          <Route exact path={"/register"} element={<Register />} />
+        </Routes>
+      </div>
+    </div>
   );
 };
-
 export default App;
