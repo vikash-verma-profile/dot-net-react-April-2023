@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import AuthService from "../services/auth.service";
 
 const Customer = () => {
   const [customers, SetCustomer] = useState([]);
@@ -8,7 +9,13 @@ const Customer = () => {
   const [customerAmount, setCustomerAmount] = useState(0);
 
   useEffect(() => {
-    fetch("https://localhost:7293/api/Customer")
+    fetch("https://localhost:7293/api/Customer",{
+      method:'get',
+      headers:new Headers({
+        'Authorization':'Bearer '+AuthService.getToken(),
+        'Content-Type':'application/json'
+      })
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

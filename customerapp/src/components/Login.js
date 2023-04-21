@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
+import Authservice from "../services/auth.service";
 
 const Login = () => {
 
   const [username,setUsername]=useState("");
   const [password,setPassword]=useState("");
-  //const navigate=useNavigate();
+  const navigate=useNavigate();
 
   const onChangeUsername=(e)=>{
     const username=e.target.value;
@@ -17,7 +18,15 @@ const Login = () => {
   }
   const handleLogin=(e)=>{
     e.preventDefault();
-    //navigate("/customer");
+    Authservice.login(username,password).then(()=>{
+      
+      navigate("/customer");
+      window.location.reload();
+    },
+    (error)=>{
+      console.log(error);
+    });
+    
   }
   return (
     <form onSubmit={handleLogin}>
